@@ -103,43 +103,43 @@
                     ######################################################
 
                     def euclidean_distance(v1, v2):
-    return np.sqrt(np.sum((v1 - v2)**2))
+                        return np.sqrt(np.sum((v1 - v2)**2))
 
-def predict(test_x):
-    distances = [euclidean_distance(test_x, x) for x in pd_conditions_train_np]
-    k = 3
-    k_neighbor_indices = np.argsort(distances)[:k]
-    selected_imgs_to_avg = [pd_imgs_np_train_np[i].reshape((140, 39)) for i in k_neighbor_indices]
+                    def predict(test_x):
+                        distances = [euclidean_distance(test_x, x) for x in pd_conditions_train_np]
+                        k = 3
+                        k_neighbor_indices = np.argsort(distances)[:k]
+                        selected_imgs_to_avg = [pd_imgs_np_train_np[i].reshape((140, 39)) for i in k_neighbor_indices]
 
-    avg_gen_img = np.mean(np.array(selected_imgs_to_avg), axis=0)
-    avg_gen_img = avg_gen_img.astype(int)
-    return avg_gen_img
+                        avg_gen_img = np.mean(np.array(selected_imgs_to_avg), axis=0)
+                        avg_gen_img = avg_gen_img.astype(int)
+                        return avg_gen_img
 
-def get_np_conditions_vector():
-    c1 = float(Element('testInput1').element.value)
-    c2 = float(Element('testInput2').element.value)
+                    def get_np_conditions_vector():
+                        c1 = float(Element('testInput1').element.value)
+                        c2 = float(Element('testInput2').element.value)
 
-    conditions_list = [c1, c2]
-    np_conditions_list = np.array(conditions_list)
-    np_conditions_list = np.expand_dims(np_conditions_list, axis=0)
+                        conditions_list = [c1, c2]
+                        np_conditions_list = np.array(conditions_list)
+                        np_conditions_list = np.expand_dims(np_conditions_list, axis=0)
 
-    return np_conditions_list
+                        return np_conditions_list
 
-def my_gen_function():
-    test_x = get_np_conditions_vector()
+                    def my_gen_function():
+                        test_x = get_np_conditions_vector()
 
-    generated_img = predict(test_x)
+                        generated_img = predict(test_x)
 
-    # Convert conditions to string for display
-    str_conditions = np.array2string(test_x, precision=0, separator=',', suppress_small=True)
-    str_conditions = str_conditions.replace(" ", "").replace("[", "").replace("]", "")
+                        # Convert conditions to string for display
+                        str_conditions = np.array2string(test_x, precision=0, separator=',', suppress_small=True)
+                        str_conditions = str_conditions.replace(" ", "").replace("[", "").replace("]", "")
 
-    # Display generated image
-    fig1, ax1 = plt.subplots()
-    plt.imshow(generated_img)
-    plt.colorbar(label="Colorbar", orientation="vertical")
-    ax1.set_title(str_conditions)
-    display(fig1, target="mpl")
+                        # Display generated image
+                        fig1, ax1 = plt.subplots()
+                        plt.imshow(generated_img)
+                        plt.colorbar(label="Colorbar", orientation="vertical")
+                        ax1.set_title(str_conditions)
+                        display(fig1, target="mpl")
 
    
                 </script>
