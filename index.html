@@ -47,6 +47,7 @@
                 packages = [
                     "matplotlib",
                     "numpy",
+                    "pandas"
                 ]
                 plugins = [
                     "https://pyscript.net/latest/plugins/python/py_tutor.py"
@@ -55,6 +56,7 @@
             <script type="py">
                 import matplotlib.pyplot as plt
                 import numpy as np
+                import pandas as pd
                 from pyodide.http import open_url
                 
                 url1 = ("https://lgulbran.github.io/mini_knn_project/PD_ids_train.csv")
@@ -108,7 +110,7 @@
                     plt.colorbar(label="Colorbar", orientation="vertical")
                     ax1.set_title(str(test_x))
                     display(fig1, target="mpl")
-                </script>
-            </section>
-        </body>
-    </html>
+            </script>
+        </section>
+    </body>
+</html>
