@@ -46,17 +46,17 @@
             import pandas as pd
             from pyodide.http import open_url
 
-            url1 = ("https://lgulbran.github.io/mini_knn_project/PD_ids_train.csv")
+            url1 = ("https://rcalix1.github.io/ProbabilityDensityFunctionsFromNeuralNets/experiments/2023/july2023/GANs/PyScriptExamples/example3/PD_ids_train.csv")
             pd_ids_train = pd.read_csv(open_url(url1))
             pd_ids_train_np = pd_ids_train.to_numpy()
             pd_ids_train_np = pd_ids_train_np[1:, 1:]
 
-            url2 = ("https://lgulbran.github.io/mini_knn_project/PD_conditions_train.csv")
+            url2 = ("https://rcalix1.github.io/ProbabilityDensityFunctionsFromNeuralNets/experiments/2023/july2023/GANs/PyScriptExamples/example3/PD_conditions_train.csv")
             pd_conditions_train = pd.read_csv(open_url(url2))
             pd_conditions_train_np = pd_conditions_train.to_numpy()
             pd_conditions_train_np = pd_conditions_train_np[1:, 1:]
 
-            url3 = ("https://lgulbran.github.io/mini_knn_project/PD_imgs_np_train.csv")
+            url3 = ("https://rcalix1.github.io/ProbabilityDensityFunctionsFromNeuralNets/experiments/2023/july2023/GANs/PyScriptExamples/example3/PD_imgs_np_train.csv")
             pd_imgs_np_train = pd.read_csv(open_url(url3))
             pd_imgs_np_train_np = pd_imgs_np_train.to_numpy()
             pd_imgs_np_train_np = pd_imgs_np_train_np[1:, 1:]
@@ -74,17 +74,12 @@
                 return avg_gen_img
 
             def get_np_conditions_vector():
-                c1 = float(document.getElementById('testInput1').value)
-                c2 = float(document.getElementById('testInput2').value)
-                conditions_list = [c1, c2]
-                np_conditions_list = np.array(conditions_list)
-                np_conditions_list = np.expand_dims(np_conditions_list, axis=0)
-                return np_conditions_list
+                return [float(document.getElementById('testInput1').value), float(document.getElementById('testInput2').value)]
 
             def my_gen_function():
                 test_x = get_np_conditions_vector()
                 generated_img = predict(test_x)
-                test_x = test_x.astype(int)
+                test_x = np.array(test_x).astype(int)
                 str_conditions = np.array2string(test_x, precision=0, separator=',', suppress_small=True)
                 str_conditions = str_conditions.replace(" ","")
                 str_conditions = str_conditions.replace("[","")
@@ -98,3 +93,4 @@
     </section>
 </body>
 </html>
+
