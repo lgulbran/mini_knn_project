@@ -76,7 +76,7 @@
 
             def euclidean_distance(v1, v2):
                 v2 = v2.reshape(1, -1)
-                return np.sqrt(np.sum((v1 - v2)**2))
+                return np.sqrt(np.sum((v1 - v2) ** 2))
 
             def predict(test_x):
                 distances = [euclidean_distance(test_x.flatten(), x.flatten()) for x in pd_conditions_train_np]
