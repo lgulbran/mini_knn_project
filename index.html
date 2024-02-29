@@ -88,10 +88,10 @@
                 return avg_gen_img
 
 
-            def get_np_conditions_vector():
+           def get_np_conditions_vector():
                 feature = Element('featureSelect').element.value
                 character = Element('characterSelect').element.value
-                
+    
                 # Convert feature and character values to floating-point numbers
                 try:
                     feature = float(feature)
@@ -99,12 +99,15 @@
                 except ValueError as e:
                     print("Error converting feature or character value to float:", e)
                     return None
-                
+
                 # Create separate arrays for feature and character
                 np_conditions_list = np.array([feature, character])
-                np_conditions_list = np.expand_dims(np_conditions_list, axis=0)
-                
+    
+                # Reshape to match the shape of pd_conditions_train_np
+                np_conditions_list = np_conditions_list.reshape(1, -1)
+
                 return np_conditions_list
+
 
 
             def my_gen_function():
