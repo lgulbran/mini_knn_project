@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Generate Furnace Heat Images per Conditions</title>
+        <title>Mini KNN</title>
         <meta charset="utf-8" />
         <link rel="icon" type="image/x-icon" href="./favicon.png" />
         <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
@@ -19,29 +19,23 @@
         <div>Type conditions here: </div>
         <table>
             <tr>
-                <td> Ng </td>
-                <td> <input type="text" style="border:3px solid #F7730E;" value="0" id="testInput1"/> </td>
-                <td> Pci </td>
-                <td> <input type="text" style="border:3px solid #F7730E;" value="175" id="testInput2"/> </td>
-                <td> H </td>
-                <td> <input type="text" style="border:3px solid #F7730E;" value="0" id="testInput3"/> </td>
-                <td> Wp </td>
-                <td> <input type="text" style="border:3px solid #F7730E;" value="0" id="testInput4"/> </td>
-                <td> Ph</td>
-                <td> <input type="text" style="border:3px solid #F7730E;" value="300" id="testInput5"/> </td>
+                <td> Feature </td>
+                <td> 
+                    <select id="featureSelect" style="border:3px solid #F7730E;">
+                        <option value="medieval">Medieval</option>
+                        <option value="future">Future</option>
+                    </select>
+                </td>
+                <td> Character </td>
+                <td> 
+                    <select id="characterSelect" style="border:3px solid #F7730E;">
+                        <option value="guts">Guts</option>
+                        <option value="artorias">Artorias</option>
+                        <option value="spacemarine">Space Marine</option>
+                        <option value="starcraftmarine">Starcraft Marine</option>
+                    </select>
+                </td>
             </tr>
-            <tr>
-                <td> Ox </td>
-                <td> <input type="text" style="border:3px solid #F7730E;" value="24" id="testInput6"/> </td>
-                <td> Ow </td>
-                <td> <input type="text" style="border:3px solid #F7730E;" value="7" id="testInput7"/> </td>
-                <td> Hbt</td>
-                <td> <input type="text" style="border:3px solid #F7730E;" value="1459" id="testInput8"/> </td>
-                <td> Wm</td>
-                <td> <input type="text" style="border:3px solid #F7730E;" value="12" id="testInput9"/> </td>
-                <td> Wr</td>
-                <td> <input type="text" style="border:3px solid #F7730E;" value="308750" id="testInput10"/> </td>
-            </tr> 
         </table> 
         <button id="get-time" py-click="my_gen_function()"  class="py-button">Generate</button>
         <p id="current-val"></p>
@@ -52,7 +46,7 @@
             <py-config>
                 packages = [
                     "matplotlib",
-                    "pandas",
+                    "numpy",
                 ]
                 plugins = [
                     "https://pyscript.net/latest/plugins/python/py_tutor.py"
@@ -61,7 +55,6 @@
             <script type="py">
                 import matplotlib.pyplot as plt
                 import numpy as np
-                import pandas as pd
                 from pyodide.http import open_url
                 
                 url1 = ("https://lgulbran.github.io/mini_knn_project/PD_ids_train.csv")
@@ -92,8 +85,10 @@
                     return avg_gen_img
 
                 def get_np_conditions_vector():
-                    inputs = [float(Element(f'testInput{i}').element.value) for i in range(1, 11)]
-                    np_conditions_list = np.array(inputs)
+                    feature = Element('featureSelect').element.value
+                    character = Element('characterSelect').element.value
+                    conditions_list = [feature, character]
+                    np_conditions_list = np.array(conditions_list)
                     np_conditions_list = np.expand_dims(np_conditions_list, axis=0)
                     return np_conditions_list
 
@@ -116,4 +111,4 @@
                 </script>
             </section>
         </body>
-    </
+    </html>
