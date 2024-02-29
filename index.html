@@ -75,6 +75,7 @@
             pd_imgs_np_train_np = pd_imgs_np_train_np[1:, 1:]
 
             def euclidean_distance(v1, v2):
+                v2 = v2.reshape(1, -1)
                 return np.sqrt(np.sum((v1 - v2)**2))
 
             def predict(test_x):
