@@ -35,8 +35,10 @@
  <table>
  
   <tr>
-    <td> K </td>
+     <td> K </td>
      <td> <input type="text" style="border:3px solid #F7730E;" value="1" id="kInput"/> </td>
+     <td> CMAP </td>
+     <td> <input type="text" style="border:3px solid #F7730E;" value="cool" id="cmapInput"/> </td>
      <td> Type </td>
      <td> <select style="border:3px solid #F7730E;" id="testInput1">
             <option value="0">Medieval</option>
@@ -212,7 +214,7 @@
                         #####################################################
 
                         fig1, ax1 = plt.subplots()
-                        plt.imshow(generated_img, cmap='cool')
+                        plt.imshow(generated_img, cmap='Element('cmapInput').element.value')
                         plt.colorbar(label="Colorbar", orientation="vertical")
                         ax1.set_title(str_conditions)
 
