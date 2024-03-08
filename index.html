@@ -223,7 +223,7 @@
                         #####################################################
 
                         fig1, ax1 = plt.subplots()
-                        plt.imshow(generated_img, cmap=cmapInput)
+                        plt.imshow(generated_img, cmap=document.getElementById("cmapInput").value)
                         plt.colorbar(label="Colorbar", orientation="vertical")
                         ax1.set_title(str_conditions)
 
